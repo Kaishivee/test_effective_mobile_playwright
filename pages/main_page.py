@@ -6,6 +6,26 @@ class MainPage:
     def __init__(self, page: Page):
         self.page = page
 
+        # Локаторы для элементов страницы
+        self.main_link_top = page.locator("#rec573054532").get_by_role("link", name="Effective Mobile")
+        self.main_link_bottom = page.locator("#rec572471347").get_by_role("link", name="Effective Mobile")
+        self.about_us_link = page.get_by_role("link", name="[ О нас ]")
+        self.cooperation_button = page.locator("#sbs-572374517-1680509731311").get_by_role("link")
+        self.cases_link = page.get_by_role("link", name="[ Проекты ]")
+        self.more_info_button = page.get_by_role("button", name="Подробнее")
+        self.close_popup_button = page.get_by_role("button", name="Закрыть диалоговое окно")
+        self.next_slide_button = page.locator("#rec572838727").get_by_role("button", name="Следующий слайд")
+        self.prev_slide_button = page.locator("#rec572838727").get_by_role("button", name="Предыдущий слайд")
+        self.slide_1_button = page.locator("#rec572838727").get_by_role("button", name="Перейти к слайду 1")
+        self.slide_2_button = page.locator("#rec572838727").get_by_role("button", name="Перейти к слайду 2")
+        self.slide_3_button = page.locator("#rec572838727").get_by_role("button", name="Перейти к слайду 3")
+
+        # Локаторы для секций страницы
+        self.main_section = page.locator("#rec571993583")
+        self.about_us_section = page.locator("#rec572359627")
+        self.contacts_section = page.locator("#rec572455122")
+        self.cases_section = page.locator("#rec572838727")
+
     def goto(self):
         self.page.goto("https://effective-mobile.ru/")
 
@@ -14,128 +34,98 @@ class MainPage:
 
     def check_main_top_link_exists(self):
         # Проверяем, что ссылка "Effective Mobile" есть на странице
-        main_link = self.page.locator("#rec573054532").get_by_role("link", name="Effective Mobile")
-        expect(main_link).to_be_visible()
+        expect(self.main_link_top).to_be_visible()
 
     def check_main_top_link_functionality(self):
         # Проверяем, что ссылка "Effective Mobile" работает
-        main_link = self.page.locator("#rec573054532").get_by_role("link", name="Effective Mobile")
-        expect(main_link).to_have_attribute("href", "#main")
-        main_section = self.page.locator("#rec571993583")
-        main_link.click()
-        expect(main_section).to_be_visible()
+        expect(self.main_link_top).to_have_attribute("href", "#main")
+        self.main_link_top.click()
+        expect(self.main_section).to_be_visible()
 
     def check_main_bottom_link_exists(self):
         # Проверяем, что ссылка "Effective Mobile" внизу страницы есть на странице
-        main_link = self.page.locator("#rec572471347").get_by_role("link", name="Effective Mobile")
-        expect(main_link).to_be_visible()
+        expect(self.main_link_bottom).to_be_visible()
 
     def check_main_bottom_link_functionality(self):
         # Проверяем, что ссылка "Effective Mobile" внизу страницы работает
-        main_link = self.page.locator("#rec572471347").get_by_role("link", name="Effective Mobile")
-        expect(main_link).to_have_attribute("href", "#main")
-        main_section = self.page.locator("#rec571993583")
-        main_link.click()
-        expect(main_section).to_be_visible()
+        expect(self.main_link_bottom).to_have_attribute("href", "#main")
+        self.main_link_bottom.click()
+        expect(self.main_section).to_be_visible()
 
     def check_about_us_link_exists(self):
         # Проверяем, что ссылка "О нас" есть на странице
-        about_us_link = self.page.get_by_role("link", name="[ О нас ]")
-        expect(about_us_link).to_be_visible()
+        expect(self.about_us_link).to_be_visible()
 
     def check_about_us_link_functionality(self):
         # Проверяем, что ссылка "О нас" работает
-        about_us_link = self.page.get_by_role("link", name="[ О нас ]")
-        expect(about_us_link).to_have_attribute("href", "#about")
-        about_us_section = self.page.locator("#rec572359627")
-        about_us_link.click()
-        expect(about_us_section).to_be_visible()
+        expect(self.about_us_link).to_have_attribute("href", "#about")
+        self.about_us_link.click()
+        expect(self.about_us_section).to_be_visible()
 
     def check_leave_request_cooperation_link_exists(self):
         # Проверяем, что ссылка "Оставить заявку на сотрудничество" есть на странице
-        cooperation_button = self.page.locator("#sbs-572374517-1680509731311").get_by_role("link")
-        expect(cooperation_button).to_be_visible()
+        expect(self.cooperation_button).to_be_visible()
 
     def check_leave_request_cooperation_link_functionality(self):
         # Проверяем, что кнопка "Оставить заявку на сотрудничество" работает
-        cooperation_button = self.page.locator("#sbs-572374517-1680509731311").get_by_role("link")
-        contacts_section = self.page.locator("#rec572455122")
-        cooperation_button.click()
-        expect(contacts_section).to_be_visible()
+        self.cooperation_button.click()
+        expect(self.contacts_section).to_be_visible()
 
     def check_cases_link_exists(self):
         # Проверяем, что ссылка "Проекты" есть на странице
-        cases_link = self.page.get_by_role("link", name="[ Проекты ]")
-        expect(cases_link).to_be_visible()
+        expect(self.cases_link).to_be_visible()
 
     def check_cases_link_functionality(self):
         # Проверяем, что ссылка "Проекты" работает
-        cases_link = self.page.get_by_role("link", name="[ Проекты ]")
-        expect(cases_link).to_have_attribute("href", "#cases")
-        cases_section = self.page.locator("#rec572838727")
-        cases_link.click()
-        expect(cases_section).to_be_visible()
+        expect(self.cases_link).to_have_attribute("href", "#cases")
+        self.cases_link.click()
+        expect(self.cases_section).to_be_visible()
 
     def check_more_info_button_exists(self):
         # Проверяем, что кнопка "Подробнее" есть на странице
-        more_info_button = self.page.get_by_role("button", name="Подробнее")
-        expect(more_info_button).to_be_visible()
+        expect(self.more_info_button).to_be_visible()
 
     def check_more_info_popup_open(self):
         # Проверяем, что попап открывается при нажатии на кнопку "Подробнее"
-        more_info_button = self.page.get_by_role("button", name="Подробнее")
-        more_info_button.click()
-        close_button = self.page.get_by_role("button", name="Закрыть диалоговое окно")
-        expect(close_button).to_be_visible()  # Проверяем, что кнопка закрытия видима (попап открыт)
+        self.more_info_button.click()
+        expect(self.close_popup_button).to_be_visible()  # Проверяем, что кнопка закрытия видима (попап открыт)
 
     def check_more_info_popup_close(self):
         # Проверяем, что попап закрывается при нажатии на кнопку "Закрыть диалоговое окно"
-        more_info_button = self.page.get_by_role("button", name="Подробнее")
-        more_info_button.click()
-        close_button = self.page.get_by_role("button", name="Закрыть диалоговое окно")
-        close_button.click()
-        expect(close_button).not_to_be_visible()  # Проверяем, что кнопка закрытия больше не видима (попап закрыт)
+        self.more_info_button.click()
+        self.close_popup_button.click()
+        expect(self.close_popup_button).not_to_be_visible()  # Проверяем, что кнопка закрытия больше не видима (попап закрыт)
 
     def check_carousel_cases_big_buttons_exist(self):
         # Проверяем, что кнопки "Следующий слайд" и "Предыдущий слайд" есть на странице
-        next_button = self.page.locator("#rec572838727").get_by_role("button", name="Следующий слайд")
-        prev_button = self.page.locator("#rec572838727").get_by_role("button", name="Предыдущий слайд")
-        expect(next_button).to_be_visible()
-        expect(prev_button).to_be_visible()
+        expect(self.next_slide_button).to_be_visible()
+        expect(self.prev_slide_button).to_be_visible()
 
     def check_carousel_cases_next_big_button_functionality(self):
         # Проверяем, что кнопка "Следующий слайд" работает
-        next_button = self.page.locator("#rec572838727").get_by_role("button", name="Следующий слайд")
-        next_button.click()
+        self.next_slide_button.click()
 
     def check_carousel_cases_prev_big_button_functionality(self):
         # Проверяем, что кнопка "Предыдущий слайд" работает
-        prev_button = self.page.locator("#rec572838727").get_by_role("button", name="Предыдущий слайд")
-        prev_button.click()
+        self.prev_slide_button.click()
 
     def check_carousel_cases_small_buttons_exist(self):
         # Проверяем, что кнопки перехода к слайдам 1, 2 и 3 есть на странице
-        slide_1_button = self.page.locator("#rec572838727").get_by_role("button", name="Перейти к слайду 1")
-        slide_2_button = self.page.locator("#rec572838727").get_by_role("button", name="Перейти к слайду 2")
-        slide_3_button = self.page.locator("#rec572838727").get_by_role("button", name="Перейти к слайду 3")
-        expect(slide_1_button).to_be_visible()
-        expect(slide_2_button).to_be_visible()
-        expect(slide_3_button).to_be_visible()
+        expect(self.slide_1_button).to_be_visible()
+        expect(self.slide_2_button).to_be_visible()
+        expect(self.slide_3_button).to_be_visible()
 
     def check_carousel_cases_slide_1_small_button_functionality(self):
         # Проверяем, что кнопка "Перейти к слайду 1" работает
-        slide_1_button = self.page.locator("#rec572838727").get_by_role("button", name="Перейти к слайду 1")
-        slide_1_button.click()
+        self.slide_1_button.click()
 
     def check_carousel_cases_slide_2_small_button_functionality(self):
         # Проверяем, что кнопка "Перейти к слайду 2" работает
-        slide_2_button = self.page.locator("#rec572838727").get_by_role("button", name="Перейти к слайду 2")
-        slide_2_button.click()
+        self.slide_2_button.click()
 
     def check_carousel_cases_slide_3_small_button_functionality(self):
         # Проверяем, что кнопка "Перейти к слайду 3" работает
-        slide_3_button = self.page.locator("#rec572838727").get_by_role("button", name="Перейти к слайду 3")
-        slide_3_button.click()
+        self.slide_3_button.click()
 
     def check_contacts_link_exists(self):
         # Проверяем, что ссылка "Контакты" есть на странице
