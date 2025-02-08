@@ -202,7 +202,7 @@ class MainPage:
         self.page.locator("#in-1680516575724").fill("test_telegram")
         self.page.locator("#ta-1680516600617").fill("Расскажите о своем проекте")
         self.submit_button.click()
-        expect(self.success_popup).to_be_visible()
+        expect(self.success_popup).to_be_visible() # может не работать из-за CAPTCHA :)
 
     def check_error_request_popup_functionality(self):
         # Проверяем функциональность формы с ошибкой
